@@ -1,23 +1,23 @@
 package com.lib.gumisoft;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.lib.gumisoft.factories.Factory;
 import com.lib.gumisoft.factories.RenderFactory;
-import com.lib.gumisoft.factories.TextureFactory;
+import com.lib.gumisoft.player.Player;
 
 public class HeroMain extends ApplicationAdapter {
 	SpriteBatch batch;
-	Texture playerKai;
-	private TextureFactory textureFactory;
 	private RenderFactory renderFactory;
+	private Factory factory;
+	private Player player;
 
 	@Override
 	public void create () {
 		renderFactory = new RenderFactory();
-		textureFactory = new TextureFactory();
+		factory = new Factory();
 		batch = new SpriteBatch();
-		playerKai = textureFactory.getPlayerKai();
+		player = factory.getPlayer();
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class HeroMain extends ApplicationAdapter {
 		renderFactory.setBackgroundColorBlack();
 		renderFactory.clearScreen();
 		batch.begin();
-		batch.draw(playerKai, 0, 0);
+		player.render(batch);
 		batch.end();
 	}
 }

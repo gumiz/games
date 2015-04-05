@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
  * Created by gumiz on 2015-04-05.
  */
 public class TextureFactory {
-    public Texture getPlayerKai() {
+    public static Texture getPlayerTextureKai() {
         return new Texture("img/playerNinjagoKai.png");
     }
 }
