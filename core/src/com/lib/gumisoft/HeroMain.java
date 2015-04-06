@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.lib.gumisoft.factories.Factory;
 import com.lib.gumisoft.factories.RenderFactory;
-import com.lib.gumisoft.factories.SoundManager;
-import com.lib.gumisoft.player.IFighter;
+import com.lib.gumisoft.factories.TextureManager;
+import com.lib.gumisoft.fighters.IFighter;
 
 public class HeroMain extends ApplicationAdapter {
 	SpriteBatch batch;
@@ -24,14 +24,22 @@ public class HeroMain extends ApplicationAdapter {
 		setupFighters();
 	}
 
+
 	@Override
 	public void render () {
-		renderFactory.setBackgroundColorBlack();
 		renderFactory.clearScreen();
 		batch.begin();
+		renderLegend();
 		renderFighters();
 		resolveCollisions();
 		batch.end();
+	}
+
+	private void renderLegend() {
+		batch.draw(TextureManager.getPlayerTextureKaiBig(), 0, 10);
+		renderFactory.print(batch, String.valueOf(ninjagos.size), 70, 50);
+		batch.draw(TextureManager.getPlayerTextureSkeletonBig(), 550, 10);
+		renderFactory.print(batch, String.valueOf(enemies.size), 520, 50);
 	}
 
 	private void resolveCollisions() {

@@ -1,7 +1,7 @@
 package com.lib.gumisoft.factories;
 
-import com.lib.gumisoft.player.Enemy;
-import com.lib.gumisoft.player.Ninjago;
+import com.lib.gumisoft.fighters.Enemy;
+import com.lib.gumisoft.fighters.Ninjago;
 
 public class Factory {
     private SoundManager soundManager;

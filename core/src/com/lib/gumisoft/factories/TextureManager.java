@@ -17,4 +17,12 @@ public class TextureManager {
 
         return new Texture("img/playerNinjagoSkeleton.png");
     }
+    public static Texture getPlayerTextureKaiBig() {
+
+        return new Texture("img/playerNinjagoKaiBig.png");
+    }
+    public static Texture getPlayerTextureSkeletonBig() {
+
+        return new Texture("img/playerNinjagoSkeletonBig.png");
+    }
 }

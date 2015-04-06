@@ -1,4 +1,4 @@
-package com.lib.gumisoft.player;
+package com.lib.gumisoft.fighters;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
