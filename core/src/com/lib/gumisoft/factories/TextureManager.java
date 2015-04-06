@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class TextureManager {
     public static Texture getPlayerTextureKai() {
-        return new Texture("img/playerNinjagoKai.png");
+        return new Texture("img/playerNinjagoKai2.png");
     }
     public static Texture getPlayerTextureJay() {
         return new Texture("img/playerNinjagoJay.png");
