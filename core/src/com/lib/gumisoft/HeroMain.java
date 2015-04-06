@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.lib.gumisoft.factories.Factory;
 import com.lib.gumisoft.factories.RenderFactory;
+import com.lib.gumisoft.factories.SoundManager;
 import com.lib.gumisoft.player.IFighter;
 
 public class HeroMain extends ApplicationAdapter {
@@ -28,24 +29,34 @@ public class HeroMain extends ApplicationAdapter {
 		renderFactory.setBackgroundColorBlack();
 		renderFactory.clearScreen();
 		batch.begin();
-		for (IFighter fighter : allFighters)
-			fighter.render(batch);
+		renderFighters();
+		resolveCollisions();
+		batch.end();
+	}
+
+	private void resolveCollisions() {
 		for (IFighter ninjago : ninjagos)
 			for (IFighter enemy : enemies)
 				if (ninjago.collision(enemy)) {
 					enemies.removeValue(enemy, false);
+					factory.getSoundmanager().playSword();
 				}
+	}
 
-		batch.end();
+	private void renderFighters() {
+		for (IFighter fighter : allFighters)
+			fighter.render(batch);
 	}
 
 	private void setupFighters() {
-		for (int i = 0; i < 200; i++) {
+		for (int i = 0; i < 20; i++) {
 			IFighter ninjago = factory.getNinjago();
-			IFighter enemy = factory.getEnemy();
 			ninjagos.add(ninjago);
-			enemies.add(enemy);
 			allFighters.add(ninjago);
+		}
+		for (int i = 0; i < 200; i++) {
+			IFighter enemy = factory.getEnemy();
+			enemies.add(enemy);
 			allFighters.add(enemy);
 		}
 	}

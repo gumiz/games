@@ -3,7 +3,7 @@ package com.lib.gumisoft.player;
 import com.badlogic.gdx.math.Vector2;
 import com.lib.gumisoft.factories.Factory;
 import com.lib.gumisoft.factories.IRandomizer;
-import com.lib.gumisoft.factories.TextureFactory;
+import com.lib.gumisoft.factories.TextureManager;
 
 public class Ninjago extends Fighter {
     public Ninjago(Factory factory) {
@@ -19,10 +19,10 @@ public class Ninjago extends Fighter {
     protected void setTexture() {
         IRandomizer random = _factory.getRandomizer();
         if (random.rollDice(3))
-            texture = TextureFactory.getPlayerTextureKai();
+            texture = TextureManager.getPlayerTextureKai();
         else if (random.rollDice(2))
-            texture = TextureFactory.getPlayerTextureJay();
+            texture = TextureManager.getPlayerTextureJay();
         else
-            texture = TextureFactory.getPlayerTextureZane();
+            texture = TextureManager.getPlayerTextureZane();
     }
 }

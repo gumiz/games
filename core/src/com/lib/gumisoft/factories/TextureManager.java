@@ -2,7 +2,7 @@ package com.lib.gumisoft.factories;
 
 import com.badlogic.gdx.graphics.Texture;
 
-public class TextureFactory {
+public class TextureManager {
     public static Texture getPlayerTextureKai() {
         return new Texture("img/playerNinjagoKai.png");
     }
@@ -13,8 +13,8 @@ public class TextureFactory {
 
         return new Texture("img/playerNinjagoZane.png");
     }
-    public static Texture getPlayerTextureSnake() {
+    public static Texture getPlayerTextureSkeleton() {
 
-        return new Texture("img/playerNinjagoSnake.png");
+        return new Texture("img/playerNinjagoSkeleton.png");
     }
 }

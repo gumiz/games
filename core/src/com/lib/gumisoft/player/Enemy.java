@@ -1,11 +1,8 @@
 package com.lib.gumisoft.player;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.lib.gumisoft.factories.Factory;
-import com.lib.gumisoft.factories.IRandomizer;
-import com.lib.gumisoft.factories.TextureFactory;
+import com.lib.gumisoft.factories.TextureManager;
 
 public class Enemy extends Fighter {
     public Enemy(Factory factory) {
@@ -19,6 +16,6 @@ public class Enemy extends Fighter {
 
     @Override
     protected void setTexture() {
-        texture = TextureFactory.getPlayerTextureSnake();
+        texture = TextureManager.getPlayerTextureSkeleton();
     }
 }
