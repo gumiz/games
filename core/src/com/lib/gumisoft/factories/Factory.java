@@ -4,10 +4,12 @@ import com.lib.gumisoft.fighters.Enemy;
 import com.lib.gumisoft.fighters.Ninjago;
 
 public class Factory {
+    private Randomizer randomizer;
     private SoundManager soundManager;
 
     public Factory() {
         soundManager = new SoundManager(this);
+        randomizer = new Randomizer();
     }
 
     public SoundManager getSoundmanager() {return soundManager;}
@@ -18,6 +20,6 @@ public class Factory {
         return new Enemy(this);
     }
     public IRandomizer getRandomizer() {
-        return new Randomizer();
+        return randomizer;
     }
 }

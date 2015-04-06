@@ -10,6 +10,10 @@ public class Enemy extends Fighter {
     }
 
     @Override
+    protected void setup() {
+    }
+
+    @Override
     protected void setPosition() {
         position = new Vector2(300, 300);
     }
@@ -18,4 +22,7 @@ public class Enemy extends Fighter {
     protected void setTexture() {
         texture = TextureManager.getPlayerTextureSkeleton();
     }
+
+    @Override
+    protected void applyMousePosition() {}
 }
