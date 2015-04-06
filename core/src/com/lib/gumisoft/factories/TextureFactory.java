@@ -9,4 +9,7 @@ public class TextureFactory {
     public static Texture getPlayerTextureKai() {
         return new Texture("img/playerNinjagoKai.png");
     }
+    public static Texture getPlayerTextureSnake() {
+        return new Texture("img/playerNinjagoSnake.png");
+    }
 }
