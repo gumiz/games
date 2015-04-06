@@ -7,31 +7,18 @@ import com.lib.gumisoft.factories.Factory;
 import com.lib.gumisoft.factories.IRandomizer;
 import com.lib.gumisoft.factories.TextureFactory;
 
-public class Enemy {
-    private final Factory _factory;
-    private final IRandomizer _randomizer;
-    private Vector2 position = new Vector2();
-
+public class Enemy extends Fighter {
     public Enemy(Factory factory) {
-        _factory = factory;
-        _randomizer = _factory.getRandomizer();
-        position = new Vector2(400, 400);
+        super(factory);
     }
 
-    private Texture getTexture() {
-        return TextureFactory.getPlayerTextureSnake();
+    @Override
+    protected void setPosition() {
+        position = new Vector2(300, 300);
     }
 
-    private void move(){
-        int x = _randomizer.getRandomNumber(-1,1);
-        int y = _randomizer.getRandomNumber(-1,1);
-        position.x += x;
-        position.y += y;
+    @Override
+    protected void setTexture() {
+        texture = TextureFactory.getPlayerTextureSnake();
     }
-
-    public void render(Batch batch) {
-        move();
-        batch.draw(getTexture(), position.x, position.y);
-    }
-
 }

@@ -20,4 +20,10 @@ public class Randomizer implements IRandomizer {
         int number =  _random.nextInt((max - min) + 1) + min;
         return number;
     }
+
+    @Override
+    public boolean rollDice(int number) {
+        int testNumber = _random.nextInt(number);
+        return (testNumber == 0);
+    }
 }
