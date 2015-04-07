@@ -22,9 +22,15 @@ public class Factory {
         renderFactory = new RenderFactory(this);
         textureManager = new TextureManager(this);
     }
-    public RenderFactory getRenderFactory() {return renderFactory;}
-    public TextureManager getTextureManager() {return textureManager;}
-    public SoundService getSoundmanager() {return soundManager;}
+    public RenderFactory getRenderFactory() {
+        return renderFactory;
+    }
+    public TextureManager getTextureManager() {
+        return textureManager;
+    }
+    public SoundService getSoundManager() {
+        return soundManager;
+    }
     public Ninjago getNinjago() {
         return new Ninjago(this);
     }
@@ -34,10 +40,10 @@ public class Factory {
     public IRandomizer getRandomizer() {
         return randomizer;
     }
-    public LegendDisplayService getLegendDisplayService() { return legendDisplayService; }
+    public LegendDisplayService getLegendDisplayService() {
+        return legendDisplayService;
+    }
     public Tree getTree() {
         return new Tree(this);
     }
-
-
 }

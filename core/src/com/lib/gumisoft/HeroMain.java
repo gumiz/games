@@ -49,7 +49,7 @@ public class HeroMain extends ApplicationAdapter {
 			for (IFighter enemy : enemies)
 				if (ninjago.collision(enemy)) {
 					enemies.removeValue(enemy, true);
-					factory.getSoundmanager().playSword();
+					factory.getSoundManager().playSword();
 				}
 	}
 

@@ -8,6 +8,8 @@ import com.lib.gumisoft.factories.Factory;
 public class SoundService {
     private Factory _factory;
 
+    private static Array<Sound> swords = new Array<Sound>();
+
     public SoundService(Factory factory) {
         _factory = factory;
         swords.add(Gdx.audio.newSound(Gdx.files.internal("audio/SwordSwing.mp3")));
@@ -18,9 +20,7 @@ public class SoundService {
         swords.add(Gdx.audio.newSound(Gdx.files.internal("audio/AxeSwing.mp3")));
     }
 
-    private static Array<Sound> swords = new Array<Sound>();
-
     public void playSword() {
-        swords.get(_factory.getRandomizer().getRandomNumber(6)).play();
+        swords.get(_factory.getRandomizer().getRandomNumber(6)).play(0.3f);
     }
 }
