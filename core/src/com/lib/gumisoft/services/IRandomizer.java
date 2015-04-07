@@ -1,4 +1,4 @@
-package com.lib.gumisoft.factories;
+package com.lib.gumisoft.services;
 
 public interface IRandomizer {
     int getRandomNumber(int max);

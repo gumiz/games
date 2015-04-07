@@ -1,4 +1,4 @@
-package com.lib.gumisoft.factories;
+package com.lib.gumisoft.services;
 
 import java.util.Random;
 

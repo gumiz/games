@@ -3,7 +3,6 @@ package com.lib.gumisoft.services;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.lib.gumisoft.factories.Factory;
-import com.lib.gumisoft.factories.TextureManager;
 
 import java.util.concurrent.TimeUnit;
 
@@ -16,12 +15,12 @@ public class LegendDisplayService {
     }
 
     public void renderLegend(SpriteBatch batch, int ninjagos, int enemies) {
-        batch.draw(TextureManager.getPlayerTextureKaiBig(), 0, 10);
+        batch.draw(_factory.getTextureManager().getPlayerTextureKaiBig(), 0, 10);
         _factory.getRenderFactory().print(batch, String.valueOf(ninjagos), 70, 50);
-        batch.draw(TextureManager.getPlayerTextureSkeletonBig(), 550, 10);
+        batch.draw(_factory.getTextureManager().getPlayerTextureSkeletonBig(), 550, 10);
         _factory.getRenderFactory().print(batch, String.valueOf(enemies), 520, 50);
         long currentTime = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis());
-        _factory.getRenderFactory().print(batch, String.valueOf(currentTime-startTime), 300, 50);
+        _factory.getRenderFactory().print(batch, "Czas: " + String.valueOf(currentTime-startTime), 300, 50);
     }
     public void renderDebug(SpriteBatch batch) {
         int mouseX = Gdx.input.getX();

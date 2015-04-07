@@ -20,7 +20,7 @@ public class Enemy extends Fighter {
 
     @Override
     protected void setTexture() {
-        texture = TextureManager.getPlayerTextureSkeleton();
+        texture = _factory.getTextureManager().getPlayerTextureSkeleton();
     }
 
     @Override

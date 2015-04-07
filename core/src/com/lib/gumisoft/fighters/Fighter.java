@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.lib.gumisoft.factories.Factory;
-import com.lib.gumisoft.factories.IRandomizer;
+import com.lib.gumisoft.services.IRandomizer;
 import com.lib.gumisoft.factories.TextureManager;
 
 public abstract class Fighter implements IFighter {
@@ -13,13 +13,14 @@ public abstract class Fighter implements IFighter {
     private final IRandomizer _randomizer;
 
     protected Vector2 position = new Vector2(200, 200);
-    protected Texture texture = TextureManager.getPlayerTextureKai();
+    protected Texture texture;
     protected int directionX;
     protected int directionY;
 
     public Fighter(Factory factory) {
         _factory = factory;
         _randomizer = _factory.getRandomizer();
+        texture = _factory.getTextureManager().getPlayerTextureKai();
         setup();
         setTexture();
         setPosition();

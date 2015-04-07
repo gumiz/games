@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
+import com.lib.gumisoft.entities.Tree;
 import com.lib.gumisoft.factories.Factory;
 import com.lib.gumisoft.fighters.IFighter;
 
@@ -13,22 +14,26 @@ public class HeroMain extends ApplicationAdapter {
 	private Factory factory;
 	private final Array<IFighter> ninjagos = new Array<IFighter>();
 	private final Array<IFighter> enemies = new Array<IFighter>();
+	private Array<Tree> trees;
 
 	@Override
 	public void create () {
 		factory = new Factory();
 		batch = new SpriteBatch();
+		trees = new Array<Tree>();
 		setupFighters();
+		setupTrees();
 	}
-
 
 	@Override
 	public void render () {
-		factory.getRenderFactory().clearScreen();
 		batch.begin();
-		renderLegend();
+		factory.getRenderFactory().clearScreen();
+		factory.getRenderFactory().showBackground(batch);
 		renderFighters(enemies);
 		renderFighters(ninjagos);
+		renderTrees();
+		renderLegend();
 		resolveCollisions();
 		getInput();
 		batch.end();
@@ -52,6 +57,10 @@ public class HeroMain extends ApplicationAdapter {
 		for (IFighter fighter : fighters)
 			fighter.render(batch);
 	}
+	private void renderTrees() {
+		for (Tree tree : trees)
+			tree.render(batch);
+	}
 
 	private void setupFighters() {
 		factory.getLegendDisplayService().restartTimer();
@@ -64,6 +73,14 @@ public class HeroMain extends ApplicationAdapter {
 		for (int i = 0; i < 200; i++) {
 			IFighter enemy = factory.getEnemy();
 			enemies.add(enemy);
+		}
+	}
+
+	private void setupTrees() {
+		trees.clear();
+		for (int i = 0; i < 30; i++) {
+			Tree tree = factory.getTree();
+			trees.add(tree);
 		}
 	}
 
