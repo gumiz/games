@@ -1,5 +1,6 @@
 package com.lib.gumisoft.fighters;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.lib.gumisoft.factories.Factory;
 import com.lib.gumisoft.factories.TextureManager;
@@ -25,4 +26,12 @@ public class Enemy extends Fighter {
 
     @Override
     protected void applyMousePosition() {}
+
+    @Override
+    public void render(Batch batch) {
+        move();
+        batch.draw(texture, position.x, position.y);
+    }
+
+
 }

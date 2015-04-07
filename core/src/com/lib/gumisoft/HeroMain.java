@@ -11,6 +11,8 @@ import com.lib.gumisoft.fighters.IFighter;
 
 public class HeroMain extends ApplicationAdapter {
 	SpriteBatch batch;
+	private final int numberOfNinjagos = 20;
+	private final int numberOfEnemies = 200;
 	private Factory factory;
 	private final Array<IFighter> ninjagos = new Array<IFighter>();
 	private final Array<IFighter> enemies = new Array<IFighter>();
@@ -41,16 +43,24 @@ public class HeroMain extends ApplicationAdapter {
 
 	private void renderLegend() {
 		factory.getLegendDisplayService().renderLegend(batch, ninjagos.size, enemies.size);
-		factory.getLegendDisplayService().renderDebug(batch);
+//		factory.getLegendDisplayService().renderDebug(batch);
 	}
 
 	private void resolveCollisions() {
-		for (IFighter ninjago : ninjagos)
+		for (IFighter ninjago : ninjagos) {
 			for (IFighter enemy : enemies)
 				if (ninjago.collision(enemy)) {
-					enemies.removeValue(enemy, true);
+					dropRandomFighter(ninjago, enemy);
 					factory.getSoundManager().playSword();
 				}
+		}
+	}
+
+	private void dropRandomFighter(IFighter ninjago, IFighter enemy) {
+		if (factory.getRandomizer().rollDice(Math.round(numberOfEnemies/numberOfNinjagos)))
+            ninjagos.removeValue(ninjago, true);
+        else
+            enemies.removeValue(enemy, true);
 	}
 
 	private void renderFighters(Array<IFighter> fighters) {
@@ -66,11 +76,11 @@ public class HeroMain extends ApplicationAdapter {
 		factory.getLegendDisplayService().restartTimer();
 		ninjagos.clear();
 		enemies.clear();
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < numberOfNinjagos; i++) {
 			IFighter ninjago = factory.getNinjago();
 			ninjagos.add(ninjago);
 		}
-		for (int i = 0; i < 200; i++) {
+		for (int i = 0; i < numberOfEnemies; i++) {
 			IFighter enemy = factory.getEnemy();
 			enemies.add(enemy);
 		}

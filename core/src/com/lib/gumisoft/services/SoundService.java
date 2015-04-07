@@ -21,6 +21,6 @@ public class SoundService {
     }
 
     public void playSword() {
-        swords.get(_factory.getRandomizer().getRandomNumber(6)).play(0.3f);
+        swords.get(_factory.getRandomizer().getRandomNumber(6)).play(0.1f);
     }
 }

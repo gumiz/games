@@ -14,6 +14,7 @@ public class TextureManager {
     private final Texture skeleton;
     private final Texture skeletonBig;
     private final Texture cole;
+    private Texture frames;
 
     public TextureManager(Factory factory) {
         _factory = factory;
@@ -29,6 +30,7 @@ public class TextureManager {
         cole = new Texture("img/playerNinjagoCole.png");
         skeleton = new Texture("img/playerNinjagoSkeleton.png");
         skeletonBig = new Texture("img/playerNinjagoSkeletonBig.png");
+        frames = new Texture("img/frames.png");
     }
 
     public Texture getBackground() {
@@ -57,5 +59,9 @@ public class TextureManager {
     }
     public Array<Texture> getTreeTextures() {
         return trees;
+    }
+
+    public Texture getFrames() {
+        return frames;
     }
 }

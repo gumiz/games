@@ -6,12 +6,14 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.lib.gumisoft.factories.Factory;
 import com.lib.gumisoft.services.IRandomizer;
-import com.lib.gumisoft.factories.TextureManager;
 
 public abstract class Fighter implements IFighter {
+    private final int renderRotationDelay = 5; 
+    private final int renderMoveDelay = 2;
+    private final int _COLLISION_DISTANCE = 5;
+
     protected final Factory _factory;
     private final IRandomizer _randomizer;
-
     protected Vector2 position = new Vector2(200, 200);
     protected Texture texture;
     protected int directionX;
@@ -55,23 +57,20 @@ public abstract class Fighter implements IFighter {
     }
 
 
-    public void render(Batch batch) {
-        move();
-        batch.draw(texture, position.x, position.y);
-    }
+    public abstract void render(Batch batch);
 
-    private void move() {
-        if (_randomizer.rollDice(5))
+    protected void move() {
+        if (_randomizer.rollDice(renderRotationDelay))
             rotate();
-        changePosition();
+        if (_randomizer.rollDice(renderMoveDelay))
+            changePosition();
     }
 
     @Override
     public boolean collision(IFighter fighter) {
-        int accuracy = 5;
         float distanceX = Math.abs(this.getPosition().x - fighter.getPosition().x);
         float distanceY = Math.abs(this.getPosition(). y- fighter.getPosition().y);
-        return ( (distanceX <= accuracy) && (distanceY <= accuracy ));
+        return ( (distanceX <= _COLLISION_DISTANCE) && (distanceY <= _COLLISION_DISTANCE ));
     }
 
     @Override
