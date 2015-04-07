@@ -19,6 +19,7 @@ public class Ninjago extends Fighter {
         textures.add(_factory.getTextureManager().getPlayerTextureKai());
         textures.add(_factory.getTextureManager().getPlayerTextureJay());
         textures.add(_factory.getTextureManager().getPlayerTextureZane());
+        textures.add(_factory.getTextureManager().getPlayerTextureCole());
     }
 
     @Override
@@ -28,7 +29,7 @@ public class Ninjago extends Fighter {
 
     @Override
     protected void setTexture() {
-        int number = _factory.getRandomizer().getRandomNumber(3);
+        int number = _factory.getRandomizer().getRandomNumber(textures.size);
         texture = textures.get(number);
     }
 

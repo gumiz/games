@@ -13,6 +13,7 @@ public class TextureManager {
     private final Texture zane;
     private final Texture skeleton;
     private final Texture skeletonBig;
+    private final Texture cole;
 
     public TextureManager(Factory factory) {
         _factory = factory;
@@ -25,6 +26,7 @@ public class TextureManager {
         kaiBig = new Texture("img/playerNinjagoKaiBig.png");
         jay = new Texture("img/playerNinjagoJay.png");
         zane = new Texture("img/playerNinjagoZane.png");
+        cole = new Texture("img/playerNinjagoCole.png");
         skeleton = new Texture("img/playerNinjagoSkeleton.png");
         skeletonBig = new Texture("img/playerNinjagoSkeletonBig.png");
     }
@@ -40,6 +42,9 @@ public class TextureManager {
     }
     public Texture getPlayerTextureZane() {
         return zane;
+    }
+    public Texture getPlayerTextureCole() {
+        return cole;
     }
     public Texture getPlayerTextureSkeleton() {
         return skeleton;
