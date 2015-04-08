@@ -20,7 +20,7 @@ public class SoundService {
         swords.add(Gdx.audio.newSound(Gdx.files.internal("audio/AxeSwing.mp3")));
     }
 
-    public void playSword() {
+    public void playRandomSword() {
         swords.get(_factory.getRandomizer().getRandomNumber(6)).play(0.1f);
     }
 }

@@ -11,8 +11,6 @@ import com.lib.gumisoft.fighters.IFighter;
 
 public class HeroMain extends ApplicationAdapter {
 	SpriteBatch batch;
-	private final int numberOfNinjagos = 20;
-	private final int numberOfEnemies = 200;
 	private Factory factory;
 	private final Array<IFighter> ninjagos = new Array<IFighter>();
 	private final Array<IFighter> enemies = new Array<IFighter>();
@@ -37,7 +35,7 @@ public class HeroMain extends ApplicationAdapter {
 		renderTrees();
 		renderLegend();
 		resolveCollisions();
-		getInput();
+		controlUserInput();
 		batch.end();
 	}
 
@@ -47,20 +45,12 @@ public class HeroMain extends ApplicationAdapter {
 	}
 
 	private void resolveCollisions() {
-		for (IFighter ninjago : ninjagos) {
-			for (IFighter enemy : enemies)
-				if (ninjago.collision(enemy)) {
-					dropRandomFighter(ninjago, enemy);
-					factory.getSoundManager().playSword();
-				}
-		}
+		factory.getCollisionResolver().resolveCollisions(ninjagos, enemies);
 	}
 
-	private void dropRandomFighter(IFighter ninjago, IFighter enemy) {
-		if (factory.getRandomizer().rollDice(Math.round(numberOfEnemies/numberOfNinjagos)))
-            ninjagos.removeValue(ninjago, true);
-        else
-            enemies.removeValue(enemy, true);
+	private void setupFighters() {
+		factory.getLegendDisplayService().restartTimer();
+		factory.getFightersCreator().prepareFighters(ninjagos, enemies);
 	}
 
 	private void renderFighters(Array<IFighter> fighters) {
@@ -72,20 +62,6 @@ public class HeroMain extends ApplicationAdapter {
 			tree.render(batch);
 	}
 
-	private void setupFighters() {
-		factory.getLegendDisplayService().restartTimer();
-		ninjagos.clear();
-		enemies.clear();
-		for (int i = 0; i < numberOfNinjagos; i++) {
-			IFighter ninjago = factory.getAnimatedPrincess();
-			ninjagos.add(ninjago);
-		}
-		for (int i = 0; i < numberOfEnemies; i++) {
-			IFighter enemy = factory.getEnemy();
-			enemies.add(enemy);
-		}
-	}
-
 	private void setupTrees() {
 		trees.clear();
 		for (int i = 0; i < 30; i++) {
@@ -94,9 +70,12 @@ public class HeroMain extends ApplicationAdapter {
 		}
 	}
 
-	public void getInput() {
+	public void controlUserInput() {
 		if (Gdx.input.isKeyPressed(Input.Keys.SPACE))  {
 			setupFighters();
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))  {
+			System.exit(0);
 		}
 	}
 }

@@ -48,4 +48,10 @@ public class Factory {
     public Tree getTree() {
         return new Tree(this);
     }
+    public CollisionResolver getCollisionResolver() {
+        return new CollisionResolver(this);
+    }
+    public FightersCreator getFightersCreator() {
+        return new FightersCreator(this);
+    }
 }
