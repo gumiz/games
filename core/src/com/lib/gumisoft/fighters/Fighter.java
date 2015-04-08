@@ -5,45 +5,43 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.lib.gumisoft.factories.Factory;
+import com.lib.gumisoft.params.GameParams;
 import com.lib.gumisoft.services.IRandomizer;
 
 public abstract class Fighter implements IFighter {
-    private final int renderRotationDelay = 5; 
-    private final int renderMoveDelay = 2;
-    private final int _COLLISION_DISTANCE = 5;
 
     protected final Factory _factory;
     private final IRandomizer _randomizer;
-    protected Vector2 position = new Vector2(200, 200);
+    protected Vector2 _position;
     protected Texture texture;
     protected int directionX;
     protected int directionY;
 
-    public Fighter(Factory factory) {
+    public Fighter(Factory factory, Vector2 position) {
         _factory = factory;
+        _position = new Vector2(position.x, position.y);
+        //_position = position; //!!!! czemu to zamiast powyzszego powoduje 100 krotne przyspieczenie gry ????
         _randomizer = _factory.getRandomizer();
         texture = _factory.getTextureManager().getPlayerTextureKai();
         setup();
         setTexture();
-        setPosition();
     }
 
     protected abstract void setup();
-    protected abstract void setPosition();
     protected abstract void setTexture();
     protected abstract void applyMousePosition();
 
     private void changePosition(){
-        position.x += directionX;
-        position.y += directionY;
+        _position.x += directionX;
+        _position.y += directionY;
         overrideIfScreenBoundariesReached();
     }
 
     private void overrideIfScreenBoundariesReached() {
-        position.x = Math.min(position.x, Gdx.graphics.getWidth());
-        position.x = Math.max(position.x, 0);
-        position.y = Math.min(position.y, Gdx.graphics.getHeight());
-        position.y = Math.max(position.y, 0);
+        _position.x = Math.min(_position.x, Gdx.graphics.getWidth());
+        _position.x = Math.max(_position.x, 0);
+        _position.y = Math.min(_position.y, Gdx.graphics.getHeight());
+        _position.y = Math.max(_position.y, 0);
     }
 
     private void rotate() {
@@ -60,9 +58,9 @@ public abstract class Fighter implements IFighter {
     public abstract void render(Batch batch);
 
     protected void move() {
-        if (_randomizer.rollDice(renderRotationDelay))
+        if (_randomizer.rollDice(GameParams.renderRotationDelay))
             rotate();
-        if (_randomizer.rollDice(renderMoveDelay))
+        if (_randomizer.rollDice(GameParams.renderMoveDelay))
             changePosition();
     }
 
@@ -70,12 +68,12 @@ public abstract class Fighter implements IFighter {
     public boolean collision(IFighter fighter) {
         float distanceX = Math.abs(this.getPosition().x - fighter.getPosition().x);
         float distanceY = Math.abs(this.getPosition(). y- fighter.getPosition().y);
-        return ( (distanceX <= _COLLISION_DISTANCE) && (distanceY <= _COLLISION_DISTANCE ));
+        return ( (distanceX <= GameParams._COLLISION_DISTANCE) && (distanceY <= GameParams._COLLISION_DISTANCE ));
     }
 
     @Override
     public Vector2 getPosition() {
-        return this.position;
+        return this._position;
     }
 
 }

@@ -9,8 +9,8 @@ import com.lib.gumisoft.factories.Factory;
 public class Ninjago extends PlayerControlledFighter {
     Array<Texture> textures;
 
-    public Ninjago(Factory factory) {
-        super(factory);
+    public Ninjago(Factory factory, Vector2 position) {
+        super(factory, position);
     }
 
     @Override
@@ -20,11 +20,6 @@ public class Ninjago extends PlayerControlledFighter {
         textures.add(_factory.getTextureManager().getPlayerTextureJay());
         textures.add(_factory.getTextureManager().getPlayerTextureZane());
         textures.add(_factory.getTextureManager().getPlayerTextureCole());
-    }
-
-    @Override
-    protected void setPosition() {
-        position = new Vector2(200, 200);
     }
 
     @Override
@@ -40,7 +35,7 @@ public class Ninjago extends PlayerControlledFighter {
     }
 
     private void drawNinjago(Batch batch) {
-        batch.draw(texture, position.x, position.y);
+        batch.draw(texture, _position.x, _position.y);
     }
 
 }

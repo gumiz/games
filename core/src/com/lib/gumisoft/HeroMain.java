@@ -5,74 +5,55 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
-import com.lib.gumisoft.entities.Tree;
 import com.lib.gumisoft.factories.Factory;
 import com.lib.gumisoft.fighters.IFighter;
+import com.lib.gumisoft.services.FightersService;
 
 public class HeroMain extends ApplicationAdapter {
 	SpriteBatch batch;
 	private Factory factory;
-	private final Array<IFighter> ninjagos = new Array<IFighter>();
+	private final Array<IFighter> heroes = new Array<IFighter>();
 	private final Array<IFighter> enemies = new Array<IFighter>();
-	private Array<Tree> trees;
+	private FightersService fightersService;
 
 	@Override
 	public void create () {
 		factory = new Factory();
 		batch = new SpriteBatch();
-		trees = new Array<Tree>();
-		setupFighters();
-		setupTrees();
+		fightersService = factory.getNinjagoFightersService();
+		fightersService.prepareFighters(heroes, enemies);
+		factory.getTreesService().createTrees();
 	}
 
 	@Override
 	public void render () {
 		batch.begin();
-		factory.getRenderFactory().clearScreen();
-		factory.getRenderFactory().showBackground(batch);
-		renderFighters(enemies);
-		renderFighters(ninjagos);
-		renderTrees();
-		renderLegend();
-		resolveCollisions();
+		handleGameFrame();
 		controlUserInput();
 		batch.end();
 	}
 
-	private void renderLegend() {
-		factory.getLegendDisplayService().renderLegend(batch, ninjagos.size, enemies.size);
-//		factory.getLegendDisplayService().renderDebug(batch);
-	}
-
-	private void resolveCollisions() {
-		factory.getCollisionResolver().resolveCollisions(ninjagos, enemies);
-	}
-
-	private void setupFighters() {
+	private void handleGameFrame() {
+		factory.getRenderFactory().clearScreen();
+		factory.getRenderFactory().showBackground(batch);
 		factory.getLegendDisplayService().restartTimer();
-		factory.getFightersCreator().prepareFighters(ninjagos, enemies);
-	}
-
-	private void renderFighters(Array<IFighter> fighters) {
-		for (IFighter fighter : fighters)
-			fighter.render(batch);
-	}
-	private void renderTrees() {
-		for (Tree tree : trees)
-			tree.render(batch);
-	}
-
-	private void setupTrees() {
-		trees.clear();
-		for (int i = 0; i < 30; i++) {
-			Tree tree = factory.getTree();
-			trees.add(tree);
-		}
+		fightersService.renderFighters(batch, enemies);
+		fightersService.renderFighters(batch, heroes);
+		factory.getTreesService().renderTrees(batch);
+		factory.getLegendDisplayService().renderLegend(batch, heroes.size, enemies.size);
+		//factory.getLegendDisplayService().renderDebug(batch);
+		factory.getCollisionResolver().resolveCollisions(heroes, enemies);
+		fightersService.cloneHeroes();
 	}
 
 	public void controlUserInput() {
-		if (Gdx.input.isKeyPressed(Input.Keys.SPACE))  {
-			setupFighters();
+		if (Gdx.input.isKeyPressed(Input.Keys.F1))  {
+			fightersService = factory.getNinjagoFightersService();
+			fightersService.prepareFighters(heroes, enemies);
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.F2))  {
+			fightersService = factory.getAnimatedFightersService();
+			fightersService.prepareFighters(heroes, enemies);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))  {
 			System.exit(0);

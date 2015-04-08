@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 import com.lib.gumisoft.factories.Factory;
 
 public class AnimatedPrincess extends PlayerControlledFighter {
@@ -15,8 +14,8 @@ public class AnimatedPrincess extends PlayerControlledFighter {
     private Animation walkAnimation;
     private float animationTime;
 
-    public AnimatedPrincess(Factory factory) {
-        super(factory);
+    public AnimatedPrincess(Factory factory, Vector2 position) {
+        super(factory, position);
     }
 
     @Override
@@ -34,11 +33,6 @@ public class AnimatedPrincess extends PlayerControlledFighter {
     }
 
     @Override
-    protected void setPosition() {
-        position = new Vector2(200, 200);
-    }
-
-    @Override
     protected void setTexture() {
     }
 
@@ -51,6 +45,6 @@ public class AnimatedPrincess extends PlayerControlledFighter {
     private void drawPrincess(Batch batch) {
         animationTime += Gdx.graphics.getDeltaTime();
         TextureRegion currentFrame = walkAnimation.getKeyFrame(animationTime, true);
-        batch.draw(currentFrame, position.x, position.y);
+        batch.draw(currentFrame, _position.x, _position.y);
     }
 }
