@@ -1,17 +1,18 @@
-package com.lib.gumisoft.factories;
+package com.lib.gumisoft.services;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.lib.gumisoft.factories.Factory;
 
-public class RenderFactory {
+public class RenderService {
     private final Factory _factory;
     private BitmapFont font;
     private BitmapFont debugFont;
 
-    public RenderFactory(Factory factory) {
+    public RenderService(Factory factory) {
         _factory = factory;
         setupFonts();
     }

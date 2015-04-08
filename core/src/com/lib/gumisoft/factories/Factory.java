@@ -1,15 +1,14 @@
 package com.lib.gumisoft.factories;
 
 import com.lib.gumisoft.entities.Tree;
+import com.lib.gumisoft.fighters.AnimatedPrincess;
 import com.lib.gumisoft.fighters.Enemy;
 import com.lib.gumisoft.fighters.Ninjago;
-import com.lib.gumisoft.services.IRandomizer;
-import com.lib.gumisoft.services.LegendDisplayService;
-import com.lib.gumisoft.services.Randomizer;
-import com.lib.gumisoft.services.SoundService;
+import com.lib.gumisoft.fighters.PlayerControlledFighter;
+import com.lib.gumisoft.services.*;
 
 public class Factory {
-    private final RenderFactory renderFactory;
+    private final RenderService renderFactory;
     private final TextureManager textureManager;
     private LegendDisplayService legendDisplayService;
     private Randomizer randomizer;
@@ -19,10 +18,10 @@ public class Factory {
         soundManager = new SoundService(this);
         randomizer = new Randomizer();
         legendDisplayService = new LegendDisplayService(this);
-        renderFactory = new RenderFactory(this);
+        renderFactory = new RenderService(this);
         textureManager = new TextureManager(this);
     }
-    public RenderFactory getRenderFactory() {
+    public RenderService getRenderFactory() {
         return renderFactory;
     }
     public TextureManager getTextureManager() {
@@ -31,8 +30,11 @@ public class Factory {
     public SoundService getSoundManager() {
         return soundManager;
     }
-    public Ninjago getNinjago() {
+    public PlayerControlledFighter getNinjago() {
         return new Ninjago(this);
+    }
+    public PlayerControlledFighter getAnimatedPrincess() {
+        return new AnimatedPrincess(this);
     }
     public Enemy getEnemy() {
         return new Enemy(this);

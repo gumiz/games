@@ -77,7 +77,7 @@ public class HeroMain extends ApplicationAdapter {
 		ninjagos.clear();
 		enemies.clear();
 		for (int i = 0; i < numberOfNinjagos; i++) {
-			IFighter ninjago = factory.getNinjago();
+			IFighter ninjago = factory.getAnimatedPrincess();
 			ninjagos.add(ninjago);
 		}
 		for (int i = 0; i < numberOfEnemies; i++) {
